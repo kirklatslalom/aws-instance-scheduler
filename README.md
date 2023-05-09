@@ -7,7 +7,7 @@ This solution helps reduce operational costs by stopping resources that are not 
 ## Getting Started
 
 To understand how to use Instance Scheduler on AWS, please review the [implementation guide](https://docs.aws.amazon.com/solutions/latest/instance-scheduler-on-aws/solution-overview.html)
-on the [solution landing page](https://aws.amazon.com/solutions/implementations/instance-scheduler-on-aws/). 
+on the [solution landing page](https://aws.amazon.com/solutions/implementations/instance-scheduler-on-aws/).
 To deploy the solution, see [Deploying the Solution](#deploying-the-solution)
 
 
@@ -43,8 +43,8 @@ cdk bootstrap
 cdk deploy aws-instance-scheduler
 ```
 
-This will deploy the solution into your aws account using all default configuration settings. 
-You will then need to update those settings to their desired values from the CloudFormation console 
+This will deploy the solution into your aws account using all default configuration settings.
+You will then need to update those settings to their desired values from the CloudFormation console
 by selecting the deployed template and clicking "Update" -> "Use Current Template".
 
 Refer to the [Implementation Guide](https://docs.aws.amazon.com/solutions/latest/instance-scheduler-on-aws/deployment.html#step1)
@@ -70,7 +70,7 @@ For example: `InstanceSchedulerAccount=111222333444`
 
 ### Deploy from GitHub (AWS Console)
 This method mimics the procedure used by AWS One-Click Deploy allowing you to deploy the solution
-from the AWS console using assets that you can control and update. 
+from the AWS console using assets that you can control and update.
 
 #### Overview
 AWS Solutions use two buckets: a bucket for global access to templates, which is accessed via HTTPS, and regional buckets for access to assets within the region, such as Lambda code. You will need:
@@ -87,16 +87,16 @@ AWS Solutions use two buckets: a bucket for global access to templates, which is
 
 #### Step 1 - Download from GitHub
 
-Clone the repository to a local directory on your linux client. Note: If you intend to 
-modify Instance Scheduler you may wish to create your own fork of the GitHub repo and work from that. 
+Clone the repository to a local directory on your linux client. Note: If you intend to
+modify Instance Scheduler you may wish to create your own fork of the GitHub repo and work from that.
 This allows you to check in any changes you make to your private copy of the solution.
 
 #### Step 2 - Build the solution
 
-From the *deployment* folder in your cloned repo, run build-s3-dist.sh, passing the root name of 
-your bucket(ex. mybucket), name of the solution (i.e. aws-instance-scheduler) 
-and the version you are building (ex. v1.5.0). 
-We recommend using a similar version based on the version downloaded from GitHub 
+From the *deployment* folder in your cloned repo, run build-s3-dist.sh, passing the root name of
+your bucket(ex. mybucket), name of the solution (i.e. aws-instance-scheduler)
+and the version you are building (ex. v1.5.0).
+We recommend using a similar version based on the version downloaded from GitHub
 (ex. GitHub: v1.5.0, your build: v1.5.0.mybuild).
 
 ```
@@ -113,7 +113,7 @@ deployment/global-s3-assets
 deployment/regional-s3-assets
 ```
 
-Upload the contents of `deployment/global-s3-assets` to your global bucket and `deployment/regional-s3-assets` 
+Upload the contents of `deployment/global-s3-assets` to your global bucket and `deployment/regional-s3-assets`
 to your regional buckets following the pattern
 `s3://<bucket-name>/<solution-name>/<version>/<asset>`.
 
@@ -134,9 +134,9 @@ s3://mybucket-us-west-1/aws-instance-scheduler/v1.5.0/f779f5b7643ba70e9a5e25c889
 
 #### Step 4 - Deploy The Solution
 
-Refer to the [Implementation Guide](https://docs.aws.amazon.com/solutions/latest/instance-scheduler-on-aws/deployment.html) 
-for deployment instructions, using the link to the instance-scheduler.template from your bucket, 
-rather than the one for AWS Solutions. 
+Refer to the [Implementation Guide](https://docs.aws.amazon.com/solutions/latest/instance-scheduler-on-aws/deployment.html)
+for deployment instructions, using the link to the instance-scheduler.template from your bucket,
+rather than the one for AWS Solutions.
 Ex. https://mybucket.s3.amazonaws.com/aws-instance-scheduler/v1.5.0.mybuild/instance-scheduler.template
 
 
@@ -170,14 +170,14 @@ tox -e cli
 #### _Prerequisites - You must have an AWS account and a fork of this repo_
 
 Instance Scheduler on AWS includes an optional automated testing pipeline that can be deployed to automatically test any changes you
-develop for the solution on your own development fork. Once setup, this pipeline will automatically download, 
+develop for the solution on your own development fork. Once setup, this pipeline will automatically download,
 build, and test any changes that you push to a specified branch on your development fork.
 
 
 
 #### Step 1 - Connect CodeStar to Your GitHub Account
 
-For the pipeline to be able to test your changes, you must provide permission for CodeStar to 
+For the pipeline to be able to test your changes, you must provide permission for CodeStar to
 access your development repo.
 
 https://docs.aws.amazon.com/dtconsole/latest/userguide/connections-create-github.html
@@ -187,7 +187,7 @@ _Note: CodeStar only needs access to your Instance Scheduler development fork, i
 Once the connection has been set up, make sure you save the connection ARN for the next step.
 
 #### Step 2 -  Setup Pipeline Parameters
-Go to [Systems Manager Parameter Store](https://us-east-1.console.aws.amazon.com/systems-manager/parameters) 
+Go to [Systems Manager Parameter Store](https://us-east-1.console.aws.amazon.com/systems-manager/parameters)
 and configure the following string parameters:
 
 - /InstanceScheduler-build/connection/arn    -- the CodeStar connection ARN from the previous step
@@ -221,7 +221,7 @@ click on the pipeline that begins with aws-instance-scheduler-testing-pipeline.
 
 ## CDK Documentation
 
-AWS Instance Scheduler templates are generated using AWS CDK, for further information on CDK 
+AWS Instance Scheduler templates are generated using AWS CDK, for further information on CDK
 please refer to the [documentation](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html).
 
 

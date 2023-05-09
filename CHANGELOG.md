@@ -41,7 +41,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [1.3.2] - 2020-06-22
 ### Fixed
 - Fix the issue to start instances before the SSM maintenance window beings [#101](https://github.com/awslabs/aws-instance-scheduler/issues/101)
-- Updated the SSM feature to reduce lambda cost 
+- Updated the SSM feature to reduce lambda cost
 - Added HIBERNATE to the list of valid schedule properties
 
 

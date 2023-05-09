@@ -1,0 +1,80 @@
+---
+repos:
+  - repo: https://github.com/petalmd/dockerfile-pre-commit
+    rev: v1.0
+    hooks:
+      - id: dockerlint
+  - repo: https://github.com/ambv/black
+    rev: 23.3.0
+    hooks:
+      - id: black
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-json
+      - id: debug-statements
+      - id: trailing-whitespace
+      - id: requirements-txt-fixer
+      - id: name-tests-test
+      - id: fix-encoding-pragma
+      - id: end-of-file-fixer
+      - id: detect-private-key
+      - id: check-executables-have-shebangs
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-bandit
+    rev: v1.0.6
+    hooks:
+      - id: python-bandit-vulnerability-check
+        files: .py$
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+        args: [--max-line-length=120]
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.77.1
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_docs
+      - id: terraform_validate
+      - id: terraform_tflint
+        args:
+          - --args=--minimum-failure-severity=error
+        verbose: true
+      - id: terraform_tfsec
+      - id: terraform_checkov
+      # - id: terrascan
+      - id: infracost_breakdown
+        args:
+          - --args=--path=$(GIT_DIR)/infra/terraform/ec2/plan.json
+        verbose: true
+  - repo: https://github.com/jazzband/pip-tools
+    rev: 6.12.3
+    hooks:
+      - id: pip-compile
+  - repo: https://github.com/aws-cloudformation/cfn-python-lint
+    rev: v0.76.1
+    hooks:
+      - id: cfn-python-lint
+        files: path/to/cfn/dir/.*\.(json|yml|yaml)$
+  - repo: local
+    hooks:
+      - id: tests
+        name: run tests
+        entry: pytest -v
+        language: system
+        types: [python]
+        stages: [push]
+  - repo: https://github.com/ansible-community/ansible-lint.git
+    rev: v6.14.3
+    hooks:
+      - id: ansible-lint
+        name: Ansible-lint
+        description: This hook runs ansible-lint.
+        entry: ansible-lint --force-color ansible
+        language: python
+        # do not pass files to ansible-lint, see:
+        # https://github.com/ansible-community/ansible-lint/issues/611
+        pass_filenames: false
+        always_run: true
